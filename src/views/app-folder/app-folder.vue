@@ -19,65 +19,65 @@
             <span> Title:</span>
             <el-form-item label="" prop="title">
 
-            <el-select class="input" name="title" v-model="model.title" placeholder="Title" style="width: 100%;">
-              <el-option
-                  v-for="item in titles"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-              </el-option>
-            </el-select>
+              <el-select class="input" name="title" v-model="model.title" placeholder="Title" style="width: 100%;">
+                <el-option
+                    v-for="item in titles"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                </el-option>
+              </el-select>
             </el-form-item>
           </div>
           <div class="field">
             <span>Name:</span>
             <el-form-item label="" prop="name">
-            <el-input placeholder="Name" name="name" v-model="model.name">
-            </el-input>
+              <el-input placeholder="Name" name="name" v-model="model.name">
+              </el-input>
             </el-form-item>
           </div>
           <div class="field">
             <span>Institution:</span>
             <el-form-item label="" prop="institution">
-            <el-input placeholder="Institution" name="institution" v-model="model.institution">
-            </el-input>
+              <el-input placeholder="Institution" name="institution" v-model="model.institution">
+              </el-input>
             </el-form-item>
           </div>
           <div class="field">
             <span>Author's email:</span>
-            <el-form-item label="" prop="authorsEmail">
-            <el-input placeholder="Author's email" name="authorsEmail" v-model="model.authors_email">
-            </el-input>
+            <el-form-item label="" prop="authors_email">
+              <el-input placeholder="Author's email" name="authors_email" v-model="model.authors_email">
+              </el-input>
             </el-form-item>
           </div>
           <div class="field">
             <span>Author's Phone:</span>
-            <el-form-item label="" prop="authorsPhone">
-            <el-input placeholder="Author's Phone" name="authorsPhone" v-model="model.authors_phone">
-            </el-input>
+            <el-form-item label="" prop="authors_phone">
+              <el-input placeholder="Author's Phone" name="authors_phone" v-model="model.authors_phone">
+              </el-input>
             </el-form-item>
           </div>
           <div class="field">
             <span> Track:</span>
             <el-form-item label="" prop="track">
 
-            <el-select class="input" name="track" v-model="model.track" placeholder="Track" style="width: 100%;">
-              <el-option
-                  v-for="item in titles"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-              </el-option>
-            </el-select>
+              <el-select class="input" name="track" v-model="model.track" placeholder="Track" style="width: 100%;">
+                <el-option
+                    v-for="item in titles"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                </el-option>
+              </el-select>
             </el-form-item>
           </div>
           <div class="field">
             <span>Message: </span>
             <el-form-item label="" prop="message">
 
-            <el-input placeholder="Message" type="textarea" name="message"
-                      :autosize="{ minRows: 4}" v-model="model.message">
-            </el-input>
+              <el-input placeholder="Message" type="textarea" name="message"
+                        :autosize="{ minRows: 4}" v-model="model.message">
+              </el-input>
             </el-form-item>
           </div>
           <div class="field" style="align-items: center">
@@ -113,12 +113,11 @@ import db from "@/Firebase/firebaseInit";
 import moment from 'moment'
 import {mapMutations, mapState} from "vuex";
 import mutations from "@/store/mutations_types";
-import {generateUUID, generateGeneralUUID} from "@/common/utilities.service";
+import {generateGeneralUUID} from "@/common/utilities.service";
 import Loader from "@/components/Loader";
 import VueEasyLightbox from 'vue-easy-lightbox'
-// import {google} from "googleapis";
-import path from "path";
-import apiServices from "@/common/language.service.js"
+
+import apiServices from "@/common/language.service.js";
 
 export default {
   name: "app-folder",
@@ -131,6 +130,7 @@ export default {
       loading: false,
       show_file_error: null,
       model: {
+        id: generateGeneralUUID(),
         title: null,
         name: null,
         institution: null,
@@ -153,10 +153,10 @@ export default {
         institution: [
           {required: true, message: 'Field is required', trigger: 'change'},
         ],
-        authorsEmail: [
+        authors_email: [
           {required: true, message: 'Field is required', trigger: 'change'},
         ],
-        authorsPhone: [
+        authors_phone: [
           {required: true, message: 'Field is required', trigger: 'change'},
         ],
         track: [
@@ -199,37 +199,8 @@ export default {
 
 
   mounted() {
-    this.loginFirst();
-    // this.test();
 
-    // db.collection('/qendresa/order/orders').get().then(querySnapshot => {
-    //   querySnapshot.forEach(doc => {
-    //
-    //
-    //     let x = doc.data()
-    //     this.$set(x, 'ditet', this.diferenca_diteve(doc.data()));
-    //     this.$set(x, 'document_id', doc.id);
-    //
-    //     this.orders_list.push(x)
-    //     y.push(x)
-    //
-    //     y.sort(function (a, b) {
-    //
-    //       return a.ditet - b.ditet;
-    //     });
-    //     this[mutations.SET_ORDERS](y);
-    //
-    //     if (this.diferenca_diteve(doc.data()) <= -1) {
-    //
-    //       this.porositDorzuara(doc);
-    //     }
-    //
-    //   })
-    //
-    // }).catch(error => console.log(error)).finally(() => {
-    //   this.loading = false;
-    //   this.testSort(this.orders_list);
-    // })
+    this.loginFirst();
 
 
   },
@@ -243,22 +214,31 @@ export default {
     save() {
 
 
-        this.$refs['documentForm'].validate((valid) => {
-          if(this.show_file_error === null){
-            this.show_file_error = true
-          }
-          if (valid && show_file_error === false) {
-            this.uploadF();
-            db.collection('/folder-app-1/data/data').add(this.model).then(docRef => {
+      this.$refs['documentForm'].validate((valid) => {
+        if (this.show_file_error === null) {
+          this.show_file_error = true
+        }
+        if (valid && this.show_file_error === false) {
+          this.uploadF();
+          db.collection('/folder-app-1/data/data').add(this.model).then(docRef => {
 
-            }).catch(error => console.log(error))
+            this.model = {
+              id: null,
+              title: null,
+              name: null,
+              institution: null,
+              authors_email: null,
+              authors_phone: null,
+              track: null,
+              message: null,
+            }
 
-          } else {
-            return false;
-          }
-        });
+          }).catch(error => console.log(error))
 
-
+        } else {
+          return false;
+        }
+      });
 
 
     },
@@ -326,7 +306,7 @@ export default {
 
 
       let headers = {
-        Authorization: "Bearer" + " " + "ya29.A0ARrdaM8MEqhSM1exUSzHeFsHDwcinlM7wKcGVSE1tIJzXE5SckMKw-CXpMc0Tmi4Usvyyhr7gydoDsm37Gk2c29ZLleCUDrnpL5dg_reECNR9n6Q5cr2NBJZlS_p_BTAijN0cip4YXS4tctQZGh_OuOl_WrVRg"
+        Authorization: "Bearer" + " " + this.access_token
       }
 
       console.log(selectedFileS);
@@ -341,6 +321,7 @@ export default {
         console.log("error", error)
 
       }).finally(() => {
+
         this.loading = false
       })
 
@@ -383,9 +364,10 @@ export default {
 
 <style scoped lang="scss">
 
-.el-form-item{
+.el-form-item {
   width: 100% !important;
 }
+
 .wrapper-auk {
   display: flex;
   justify-content: center;
