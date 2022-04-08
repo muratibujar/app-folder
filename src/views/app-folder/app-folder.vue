@@ -309,19 +309,17 @@ export default {
         Authorization: "Bearer" + " " + this.access_token
       }
 
-      console.log(selectedFileS);
       this.$set(selectedFileS, 'title', 'koso');
 
 
       apiServices.postDataUp(selectedFileS, headers).then(res => {
 
-        console.log("res", res)
 
       }).catch((error) => {
         console.log("error", error)
 
       }).finally(() => {
-
+        this.file = null;
         this.loading = false
       })
 
