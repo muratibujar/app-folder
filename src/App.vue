@@ -20,10 +20,8 @@ export default {
     var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     // var element = document.getElementById('text');
     if (isMobile) {
-      this[mutations.SER_BOTTOM_MENU_MOBILE](false);
       // element.innerHTML = "You are using Mobile";
     } else {
-      this[mutations.SER_BOTTOM_MENU_MOBILE](true);
       // element.innerHTML = "You are using Desktop";
     }
     window.addEventListener("beforeinstallprompt", e => {
