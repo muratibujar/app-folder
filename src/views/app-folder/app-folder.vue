@@ -1,0 +1,448 @@
+<template>
+  <Loader v-if="loading"></Loader>
+  <div class="wrapper-auk" v-else>
+
+    <!--    <iframe src="https://qendresa-fashion.web.app/#/" height="500" width="1000" title="Iframe Example"></iframe>-->
+
+
+    <div class="body">
+
+      <div class="header">
+        <h1>Online Paper Submit</h1>
+        <p>Submit your paper for our upcoming International Academic conference in this page. (Submit in .Doc
+          format)</p>
+      </div>
+      <el-form :model="model" status-icon :rules="rules" ref="documentForm" label-width="120px"
+               class="demo-ruleForm">
+        <div class="box-form">
+          <div class="field">
+            <span> Title:</span>
+            <el-form-item label="" prop="title">
+
+            <el-select class="input" name="title" v-model="model.title" placeholder="Title" style="width: 100%;">
+              <el-option
+                  v-for="item in titles"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+            </el-form-item>
+          </div>
+          <div class="field">
+            <span>Name:</span>
+            <el-form-item label="" prop="name">
+            <el-input placeholder="Name" name="name" v-model="model.name">
+            </el-input>
+            </el-form-item>
+          </div>
+          <div class="field">
+            <span>Institution:</span>
+            <el-form-item label="" prop="institution">
+            <el-input placeholder="Institution" name="institution" v-model="model.institution">
+            </el-input>
+            </el-form-item>
+          </div>
+          <div class="field">
+            <span>Author's email:</span>
+            <el-form-item label="" prop="authorsEmail">
+            <el-input placeholder="Author's email" name="authorsEmail" v-model="model.authors_email">
+            </el-input>
+            </el-form-item>
+          </div>
+          <div class="field">
+            <span>Author's Phone:</span>
+            <el-form-item label="" prop="authorsPhone">
+            <el-input placeholder="Author's Phone" name="authorsPhone" v-model="model.authors_phone">
+            </el-input>
+            </el-form-item>
+          </div>
+          <div class="field">
+            <span> Track:</span>
+            <el-form-item label="" prop="track">
+
+            <el-select class="input" name="track" v-model="model.track" placeholder="Track" style="width: 100%;">
+              <el-option
+                  v-for="item in titles"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+            </el-form-item>
+          </div>
+          <div class="field">
+            <span>Message: </span>
+            <el-form-item label="" prop="message">
+
+            <el-input placeholder="Message" type="textarea" name="message"
+                      :autosize="{ minRows: 4}" v-model="model.message">
+            </el-input>
+            </el-form-item>
+          </div>
+          <div class="field" style="align-items: center">
+            <span> Attach Your File: </span>
+            <el-button @click="merre()">Choose File</el-button>
+            <span v-if="file === null"> No File Choosen </span>
+            <span v-else> {{ this.file.name }} </span>
+          </div>
+          <div class="field" v-if="show_file_error">
+            <p style="width: 200px"></p>
+            <p style="color: #F56C6C;font-size: 12px;">File is required</p>
+          </div>
+
+
+          <div class="field-btn">
+            <el-button type="primary" @click="save()">Submit</el-button>
+            <input type="file" id="myFile" name="filename" style="display:none" @change="checkFile()">
+            <!--          <el-button @click="merre()">uploadFile</el-button>-->
+
+          </div>
+
+
+        </div>
+
+      </el-form>
+    </div>
+
+  </div>
+</template>
+
+<script>
+import db from "@/Firebase/firebaseInit";
+import moment from 'moment'
+import {mapMutations, mapState} from "vuex";
+import mutations from "@/store/mutations_types";
+import {generateUUID, generateGeneralUUID} from "@/common/utilities.service";
+import Loader from "@/components/Loader";
+import VueEasyLightbox from 'vue-easy-lightbox'
+// import {google} from "googleapis";
+import path from "path";
+import apiServices from "@/common/language.service.js"
+
+export default {
+  name: "app-folder",
+  components: {
+    Loader,
+    VueEasyLightbox
+  },
+  data() {
+    return {
+      loading: false,
+      show_file_error: null,
+      model: {
+        title: null,
+        name: null,
+        institution: null,
+        authors_email: null,
+        authors_phone: null,
+        track: null,
+        message: null,
+
+      },
+      file: null,
+      access_token: null,
+
+      rules: {
+        name: [
+          {required: true, message: 'Field is required', trigger: 'change'},
+        ],
+        title: [
+          {required: true, message: 'Field is required', trigger: 'change'},
+        ],
+        institution: [
+          {required: true, message: 'Field is required', trigger: 'change'},
+        ],
+        authorsEmail: [
+          {required: true, message: 'Field is required', trigger: 'change'},
+        ],
+        authorsPhone: [
+          {required: true, message: 'Field is required', trigger: 'change'},
+        ],
+        track: [
+          {required: true, message: 'Field is required', trigger: 'change'},
+        ],
+        message: [
+          {required: true, message: 'Field is required', trigger: 'change'},
+        ],
+      },
+
+
+      titles: [
+        {
+          label: 'Prof. Dr.',
+          value: 'Prof. Dr.'
+        }, {
+          label: 'Assoc. Prof. Dr.',
+          value: 'Assoc. Prof. Dr.'
+        }, {
+          label: 'Assist. Prof. Dr.',
+          value: 'Assist. Prof. Dr.'
+        }, {
+          label: 'Dr.',
+          value: 'Dr'
+        }, {
+          label: 'Mr',
+          value: 'Mr'
+        }, {
+          label: 'Mrs',
+          value: 'Mrs'
+        }, {
+          label: 'Miss',
+          value: 'Miss'
+        }
+      ]
+
+
+    }
+  },
+
+
+  mounted() {
+    this.loginFirst();
+    // this.test();
+
+    // db.collection('/qendresa/order/orders').get().then(querySnapshot => {
+    //   querySnapshot.forEach(doc => {
+    //
+    //
+    //     let x = doc.data()
+    //     this.$set(x, 'ditet', this.diferenca_diteve(doc.data()));
+    //     this.$set(x, 'document_id', doc.id);
+    //
+    //     this.orders_list.push(x)
+    //     y.push(x)
+    //
+    //     y.sort(function (a, b) {
+    //
+    //       return a.ditet - b.ditet;
+    //     });
+    //     this[mutations.SET_ORDERS](y);
+    //
+    //     if (this.diferenca_diteve(doc.data()) <= -1) {
+    //
+    //       this.porositDorzuara(doc);
+    //     }
+    //
+    //   })
+    //
+    // }).catch(error => console.log(error)).finally(() => {
+    //   this.loading = false;
+    //   this.testSort(this.orders_list);
+    // })
+
+
+  },
+  methods: {
+    ...mapMutations([
+      mutations.SET_ORDERS,
+      mutations.SET_POROSIA_EDIT,
+    ]),
+
+
+    save() {
+
+
+        this.$refs['documentForm'].validate((valid) => {
+          if(this.show_file_error === null){
+            this.show_file_error = true
+          }
+          if (valid && show_file_error === false) {
+            this.uploadF();
+            db.collection('/folder-app-1/data/data').add(this.model).then(docRef => {
+
+            }).catch(error => console.log(error))
+
+          } else {
+            return false;
+          }
+        });
+
+
+
+
+    },
+
+    uploadTest() {
+      // const CLIENT_ID = '310096513581-mastvnr3mu95f0nsm50pt6q28mlc2pi8.apps.googleusercontent.com'
+      // const CLIENT_SECRET = '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'
+      // const RIDIRECT_URL = 'https://developers.google.com/oauthplayground'
+      // const REFRESH_TOKEN = '1//04Wk4adMHShSCCgYIARAAGAQSNwF-L9Ir3asgxxN5XeMQsAy5HjuSfE6m7QtZ851F__IdbDc3byU8T-C6yHR9uOFIETrAjGgGA1E'
+      var clientId = "310096513581-mastvnr3mu95f0nsm50pt6q28mlc2pi8.apps.googleusercontent.com";
+
+      // redirect_uri of the project
+
+      var redirect_uri = "https://developers.google.com/oauthplayground";
+
+      // scope of the project
+
+      var scope = "https://www.googleapis.com/auth/drive";
+
+      // the url to which the user is redirected to
+
+      var url = "";
+
+
+      // this is event click listener for the button
+
+      // $("#login").click(function(){
+
+      // this is the method which will be invoked it takes four parameters
+
+      // signIn(clientId,redirect_uri,scope,url);
+      //
+      // });
+      //
+      // function signIn(clientId,redirect_uri,scope,url){
+
+      // the actual url to which the user is redirected to
+
+      url = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=" + redirect_uri
+          + "&prompt=consent&response_type=code&client_id=" + clientId + "&scope=" + scope
+          + "&access_type=offline";
+
+      // this line ma kes the user redirected to the url
+
+      window.location = url;
+
+
+      // }
+    },
+
+    checkFile() {
+      this.file = document.getElementById('myFile').files[0];
+      this.show_file_error = false;
+    },
+
+
+    merre() {
+      document.getElementById("myFile").click();
+    },
+
+    uploadF() {
+
+      this.loading = true
+      const selectedFileS = document.getElementById('myFile').files[0];
+
+
+      let headers = {
+        Authorization: "Bearer" + " " + "ya29.A0ARrdaM8MEqhSM1exUSzHeFsHDwcinlM7wKcGVSE1tIJzXE5SckMKw-CXpMc0Tmi4Usvyyhr7gydoDsm37Gk2c29ZLleCUDrnpL5dg_reECNR9n6Q5cr2NBJZlS_p_BTAijN0cip4YXS4tctQZGh_OuOl_WrVRg"
+      }
+
+      console.log(selectedFileS);
+      this.$set(selectedFileS, 'title', 'koso');
+
+
+      apiServices.postDataUp(selectedFileS, headers).then(res => {
+
+        console.log("res", res)
+
+      }).catch((error) => {
+        console.log("error", error)
+
+      }).finally(() => {
+        this.loading = false
+      })
+
+
+    },
+
+    loginFirst() {
+      this.loading = true;
+      const redirect_uri = "https://developers.google.com/oauthplayground" // replace with your redirect_uri;
+      const client_secret = "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"; // replace with your client secret
+      var client_id = "310096513581-mastvnr3mu95f0nsm50pt6q28mlc2pi8.apps.googleusercontent.com"// replace it with your client id;
+
+      let payload = {
+        redirect_uri: redirect_uri,
+        client_secret: client_secret,
+        client_id: client_id,
+        refresh_token: '1//04Wk4adMHShSCCgYIARAAGAQSNwF-L9Ir3asgxxN5XeMQsAy5HjuSfE6m7QtZ851F__IdbDc3byU8T-C6yHR9uOFIETrAjGgGA1E',
+        grant_type: "refresh_token"
+      }
+
+      apiServices.postData(payload).then(res => {
+
+        this.access_token = res.data.access_token
+
+
+      }).catch((error) => {
+        console.log("error", error)
+
+      }).finally(() => {
+        this.loading = false;
+      })
+
+
+    }
+
+  }
+
+}
+</script>
+
+<style scoped lang="scss">
+
+.el-form-item{
+  width: 100% !important;
+}
+.wrapper-auk {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: white;
+
+  .title-legend {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #363435;
+    margin-top: 5px;
+
+    ::v-deep .el-button--primary {
+      color: #FFF;
+      background-color: #363435 !important;
+      border-color: #363435 !important;
+    }
+
+  }
+
+  .body {
+
+    .header {
+      margin-top: 20px;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .box-form {
+      text-align: left;
+      width: 70%;
+
+      .field {
+        //max-width: 400px;
+        display: flex;
+        //align-items: center;
+        gap: 10px;
+
+        //margin-bottom: 10px;
+
+        span {
+          width: 200px
+        }
+      }
+
+      .field-btn {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+      }
+    }
+  }
+
+
+}
+</style>
+

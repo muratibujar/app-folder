@@ -1,0 +1,72 @@
+{
+  "name": "app-folder",
+  "version": "2.0.0",
+  "private": true,
+  "description": "## Project setup ``` npm install ```",
+  "author": "bujar murati",
+  "scripts": {
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "dev": "vue-cli-service serve --port 8000 --open",
+    "deploy": "firebase deploy --project new-sales-2020"
+  },
+  "main": "babel.config.js",
+  "dependencies": {
+    "apexcharts": "^3.16.1",
+    "axios": "^0.19.0",
+    "core-js": "^2.6.5",
+    "crypto-js": "^3.1.9-1",
+    "element-ui": "^2.13.0",
+    "firebase": "^7.0.0",
+    "jspdf": "^1.5.3",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "nprogress": "^0.2.0",
+    "register-service-worker": "^1.7.1",
+    "vue": "^2.6.10",
+    "vue-apexcharts": "^1.5.2",
+    "vue-easy-lightbox": "^0.16.2",
+    "vue-feather-icons": "^4.22.0",
+    "vue-i18n": "^8.12.0",
+    "vue-router": "^3.0.3",
+    "vuejs-logger": "^1.5.3",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.1.1",
+    "@vue/cli-plugin-eslint": "^3.1.1",
+    "@vue/cli-plugin-pwa": "^4.5.13",
+    "@vue/cli-service": "^3.1.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "js-cookie": "^2.2.1",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "license": "ISC"
+}
