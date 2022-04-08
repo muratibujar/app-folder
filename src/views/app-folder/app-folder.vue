@@ -2,9 +2,6 @@
   <Loader v-if="loading"></Loader>
   <div class="wrapper-auk" v-else>
 
-    <!--    <iframe src="https://qendresa-fashion.web.app/#/" height="500" width="1000" title="Iframe Example"></iframe>-->
-
-
     <div class="body">
 
       <div class="header">
