@@ -8,9 +8,10 @@
     <div class="body">
 
       <div class="header">
-        <h1>Online Paper Submit</h1>
-        <p>Submit your paper for our upcoming International Academic conference in this page. (Submit in .Doc
-          format)</p>
+        <h1>Call for 2022 ATMAE Annual Conference Proposals!</h1>
+        <p>The Association of Technology, Management, and Applied Engineering encourage members, professionals,<br> and
+          other interested parties to submit conference proposals for the 2022 ATMAE Annual Conference,<br> to be held in
+          Louisville, Kentucky on November 9-11, 2022.</p>
       </div>
       <el-form :model="model" status-icon :rules="rules" ref="documentForm" label-width="120px"
                class="demo-ruleForm">
@@ -63,7 +64,7 @@
 
               <el-select class="input" name="track" v-model="model.track" placeholder="Track" style="width: 100%;">
                 <el-option
-                    v-for="item in titles"
+                    v-for="item in options"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -170,26 +171,53 @@ export default {
 
       titles: [
         {
-          label: 'Prof. Dr.',
-          value: 'Prof. Dr.'
-        }, {
-          label: 'Assoc. Prof. Dr.',
-          value: 'Assoc. Prof. Dr.'
-        }, {
-          label: 'Assist. Prof. Dr.',
-          value: 'Assist. Prof. Dr.'
-        }, {
           label: 'Dr.',
-          value: 'Dr'
+          value: 'Dr.'
+        }, {
+          label: 'Prof.',
+          value: 'Prof.'
         }, {
           label: 'Mr',
           value: 'Mr'
         }, {
-          label: 'Mrs',
-          value: 'Mrs'
+          label: 'Ms',
+          value: 'Ms'
+        }
+      ],
+
+      options: [
+        {
+          label: 'Administration',
+          value: 'Administration'
         }, {
-          label: 'Miss',
-          value: 'Miss'
+          label: 'Construction',
+          value: 'Construction'
+        }, {
+          label: 'Distance Learning/Teaching Innovations',
+          value: 'Distance Learning/Teaching Innovations'
+        }, {
+          label: 'Electricity',
+          value: 'Electricity'
+        }, {
+          label: 'Electronics',
+          value: 'Electronics'
+        }, {
+          label: 'Computer Technology & Energy Issues',
+          value: 'Computer Technology & Energy Issues'
+        }, {
+          label: 'Graphics',
+          value: 'Graphics'
+        }, {
+          label: 'Management',
+          value: 'Management'
+        }, {
+          label: 'Micro/Nanotechnology',
+          value: 'Micro/Nanotechnology'
+        }, {
+          label: 'WITMAE (Women in Technology, Management and Applied Engineering\n' +
+              '    Workshops)',
+          value: 'WITMAE (Women in Technology, Management and Applied Engineering\n' +
+              '    Workshops)'
         }
       ]
 
@@ -313,8 +341,12 @@ export default {
 
 
       apiServices.postDataUp(selectedFileS, headers).then(res => {
+        this.$notify({
+          title: 'Success',
+          message: 'Your Paper submitted successfully!',
+          type: 'success'
 
-
+        });
       }).catch((error) => {
         console.log("error", error)
 
@@ -325,7 +357,6 @@ export default {
 
 
     },
-
     loginFirst() {
       this.loading = true;
       const redirect_uri = "https://developers.google.com/oauthplayground" // replace with your redirect_uri;
@@ -354,7 +385,6 @@ export default {
 
 
     }
-
   }
 
 }
