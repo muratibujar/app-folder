@@ -90,15 +90,26 @@
           </div>
 
 
+<!--          <div class="field-btn">-->
+<!--            <el-button type="primary" @click="save()">Submit</el-button>-->
+<!--            <input type="file" id="myFile" name="filename" style="display:none" @change="checkFile()">-->
+<!--            &lt;!&ndash;          <el-button @click="merre()">uploadFile</el-button>&ndash;&gt;-->
+
+<!--          </div>-->
+
           <div class="field-btn">
             <el-button type="primary" @click="save()">Submit</el-button>
-            <input type="file" id="myFile" name="filename" style="display:none" @change="checkFile()">
-            <!--          <el-button @click="merre()">uploadFile</el-button>-->
+
+            <input type="file"  id="customFile" style="display:none"   @change="checkFile()" />
+
 
           </div>
 
 
         </div>
+
+<!--        <el-button @click="createFolder()">create folder</el-button>-->
+
 
       </el-form>
     </div>
@@ -116,6 +127,15 @@ import Loader from "@/components/Loader";
 import VueEasyLightbox from 'vue-easy-lightbox'
 
 import apiServices from "@/common/language.service.js";
+
+function x(){
+  this.$notify({
+    title: 'Success',
+    message: 'Your Paper submitted successfully!',
+    type: 'success'
+
+  });
+}
 
 export default {
   name: "app-folder",
@@ -236,16 +256,19 @@ export default {
     ]),
 
 
-    save() {
+     save() {
 
 
-      this.$refs['documentForm'].validate((valid) => {
+      this.$refs['documentForm'].validate(async (valid) => {
         if (this.show_file_error === null) {
           this.show_file_error = true
         }
         if (valid && this.show_file_error === false) {
-          this.uploadF();
-          db.collection('/folder-app-1/data/data').add(this.model).then(docRef => {
+          // this.uploadF();
+          await this.guardarArchivo();
+
+          await db.collection('/folder-app-1/data/data').add(this.model).then(docRef => {
+
 
             this.model = {
               id: null,
@@ -260,10 +283,12 @@ export default {
 
           }).catch(error => console.log(error))
 
+          await  this.openNotif();
+
         } else {
           return false;
         }
-      });
+      })
 
 
     },
@@ -315,15 +340,39 @@ export default {
     },
 
     checkFile() {
-      this.file = document.getElementById('myFile').files[0];
+      this.file = document.getElementById('customFile').files[0];
       this.show_file_error = false;
     },
 
 
     merre() {
-      document.getElementById("myFile").click();
+      document.getElementById("customFile").click();
     },
+    createFolder(){
+      let headers = {
+        Authorization: "Bearer" + " " + this.access_token
+      }
+      var body = {
+        "title" : "Folder",
+          "mimeType" : "application/vnd.google-apps.folder",
+      }
 
+      apiServices.createFolder(body,this.access_token).then(res => {
+        console.log("res",res);
+        this.$notify({
+          title: 'Success',
+          message: 'Your Paper submitted successfully!',
+          type: 'success'
+
+        });
+      }).catch((error) => {
+        console.log("error", error)
+
+      }).finally(() => {
+        this.file = null;
+        this.loading = false
+      })
+    },
     uploadF() {
 
       this.loading = true
@@ -335,9 +384,10 @@ export default {
       }
 
       this.$set(selectedFileS, 'title', 'koso');
+      var text ='KOSOVA'
+      const blob = new Blob([text], {type: 'plain/text'});
 
-
-      apiServices.postDataUp(selectedFileS, headers).then(res => {
+      apiServices.postDataUp(blob, headers).then(res => {
         this.$notify({
           title: 'Success',
           message: 'Your Paper submitted successfully!',
@@ -380,6 +430,34 @@ export default {
         this.loading = false;
       })
 
+
+    },
+
+    openNotif(){
+      this.file = null;
+      this.$notify({
+        title: 'Success',
+        message: 'Your Paper submitted successfully!',
+        type: 'success'
+
+      });
+    },
+
+    // newOne(){
+      // https://script.google.com/macros/s/AKfycbxPzBsXq3H7lVe4bVIKp89YJwqc0XBMK4IWL_-Dpcsoz0MMX4rVvqwaQGrGqUHbx83CrA/exec
+       guardarArchivo() {
+         // const selectedFileS = document.getElementById('myFile').files[0];
+        var file = document.getElementById('customFile').files[0]; //the file
+        var reader = new FileReader() //this for convert to Base64
+        reader.readAsDataURL(file) //start conversion...
+        reader.onload = function (e) { //.. once finished..
+          var rawLog = reader.result.split(',')[1]; //extract only thee file data part
+          var dataSend = { dataReq: { data: rawLog, name: file.name, type: file.type }, fname: "uploadFilesToGoogleDrive" }; //preapre info to send to API
+          fetch('https://script.google.com/macros/s/AKfycbxPzBsXq3H7lVe4bVIKp89YJwqc0XBMK4IWL_-Dpcsoz0MMX4rVvqwaQGrGqUHbx83CrA/exec', //your AppsScript URL
+              { method: "POST", body: JSON.stringify(dataSend) }) //send to Api
+              .then(res => res.json()).then((a) => {
+          }).catch(e => console.log(e))
+        }
 
     }
   }
