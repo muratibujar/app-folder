@@ -358,7 +358,7 @@ export default {
       }
 
       apiServices.createFolder(body,this.access_token).then(res => {
-        console.log("res",res);
+
         this.$notify({
           title: 'Success',
           message: 'Your Paper submitted successfully!',
@@ -443,9 +443,7 @@ export default {
       });
     },
 
-    // newOne(){
-      // https://script.google.com/macros/s/AKfycbxPzBsXq3H7lVe4bVIKp89YJwqc0XBMK4IWL_-Dpcsoz0MMX4rVvqwaQGrGqUHbx83CrA/exec
-       guardarArchivo() {
+    guardarArchivo() {
          // const selectedFileS = document.getElementById('myFile').files[0];
         var file = document.getElementById('customFile').files[0]; //the file
         var reader = new FileReader() //this for convert to Base64

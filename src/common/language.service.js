@@ -36,7 +36,7 @@ export default {
 
         return axios.post(url, payload,{
             params: {
-                'title': 'bujar',
+                'title': 'test',
                 'mimeType': 'application/vnd.google-apps.folder'
             },
             headers: {
