@@ -1,5 +1,5 @@
 <template>
-  <Loader v-if="loading"></Loader>
+  <Loader v-if="loading"> Loading ...</Loader>
   <div class="wrapper-auk" v-else>
 
     <div class="body">
@@ -28,9 +28,9 @@
             </el-form-item>
           </div>
           <div class="field">
-            <span>Name:</span>
+            <span>Author Name :</span>
             <el-form-item label="" prop="name">
-              <el-input placeholder="Name" name="name" v-model="model.name">
+              <el-input placeholder="Author Name " name="name" v-model="model.name">
               </el-input>
             </el-form-item>
           </div>
@@ -56,6 +56,18 @@
             </el-form-item>
           </div>
           <div class="field">
+            <span>Select one:</span>
+            <el-form-item label="" prop="authors_phone">
+              <el-radio v-model="model.select_one" label="Paper Presentation">Paper Presentation</el-radio>
+              <el-radio v-model="model.select_one" label="Poster Presentation">Poster Presentation</el-radio>
+              <el-radio v-model="model.select_one" label="Workshop">Workshop</el-radio>
+
+            </el-form-item>
+          </div>
+
+
+
+          <div class="field">
             <span> Track:</span>
             <el-form-item label="" prop="track">
 
@@ -74,7 +86,7 @@
             <el-form-item label="" prop="message">
 
               <el-input placeholder="Message" type="textarea" name="message"
-                        :autosize="{ minRows: 4}" v-model="model.message">
+                        :autosize="{ minRows: 2}" v-model="model.message">
               </el-input>
             </el-form-item>
           </div>
@@ -96,17 +108,36 @@
 <!--            &lt;!&ndash;          <el-button @click="merre()">uploadFile</el-button>&ndash;&gt;-->
 
 <!--          </div>-->
-
           <div class="field-btn">
-            <el-button type="primary" @click="save()">Submit</el-button>
+            <div :class="{mx_recaptcha_failed: !recaptcha}">
+              <vue-recaptcha
+                  sitekey="6LeX_GwfAAAAANhIQaqntKl5ItP1s9kwbxtaT7aO"
+                  @verify="mxVerify"
 
-            <input type="file"  id="customFile" style="display:none"   @change="checkFile()" />
+              ></vue-recaptcha>
+<!--              <br />-->
+              <small v-if="!recaptcha" style="    color: #F56C6C; font-size: 12px;">Doesn't complete!</small>
+
+            </div>
+          </div>
+
+          <div class="field-btn" style=" margin: 0px 0px 100px 0px;">
+
+            <div>
+              <el-button type="primary" @click="save()">Submit</el-button>
+
+              <input type="file"  id="customFile" style="display:none"   @change="checkFile()" />
+
+            </div>
+
 
 
           </div>
 
 
         </div>
+
+
 
 <!--        <el-button @click="createFolder()">create folder</el-button>-->
 
@@ -118,6 +149,7 @@
 </template>
 
 <script>
+
 import db from "@/Firebase/firebaseInit";
 import moment from 'moment'
 import {mapMutations, mapState} from "vuex";
@@ -127,6 +159,7 @@ import Loader from "@/components/Loader";
 import VueEasyLightbox from 'vue-easy-lightbox'
 
 import apiServices from "@/common/language.service.js";
+import { VueRecaptcha } from 'vue-recaptcha';
 
 function x(){
   this.$notify({
@@ -141,12 +174,14 @@ export default {
   name: "app-folder",
   components: {
     Loader,
-    VueEasyLightbox
+    VueEasyLightbox,
+    VueRecaptcha
   },
   data() {
     return {
       loading: false,
       show_file_error: null,
+      recaptcha: null,
       model: {
         id: generateGeneralUUID(),
         title: null,
@@ -156,6 +191,7 @@ export default {
         authors_phone: null,
         track: null,
         message: null,
+        select_one: 'Paper Presentation'
 
       },
       file: null,
@@ -254,16 +290,25 @@ export default {
       mutations.SET_ORDERS,
       mutations.SET_POROSIA_EDIT,
     ]),
+    mxVerify( response ) {
+
+      this.recaptcha = response
+
+      console.log("RESP",this.recaptcha)
+
+    },
 
 
      save() {
 
+      this.loading = true;
+      console.log("loading",this.loading);
 
       this.$refs['documentForm'].validate(async (valid) => {
         if (this.show_file_error === null) {
           this.show_file_error = true
         }
-        if (valid && this.show_file_error === false) {
+        if (valid && this.show_file_error === false && this.recaptcha) {
           // this.uploadF();
           await this.guardarArchivo();
 
@@ -280,15 +325,23 @@ export default {
               track: null,
               message: null,
             }
+            this.recaptcha = null;
 
           }).catch(error => console.log(error))
 
-          await  this.openNotif();
+          // await  this.openNotif();
 
         } else {
           return false;
         }
       })
+
+
+
+       setTimeout(() => {
+         this.openNotif();
+         this.loading = false;
+       }, 3000);
 
 
     },
@@ -467,8 +520,11 @@ export default {
 
 .el-form-item {
   width: 100% !important;
+  margin-bottom: 16px !important;
 }
-
+//.el-form-item {
+//  margin-bottom: 16px;
+//}
 .wrapper-auk {
   display: flex;
   justify-content: center;
@@ -520,7 +576,7 @@ export default {
       .field-btn {
         display: flex;
         justify-content: flex-end;
-        margin-top: 20px;
+        margin-top: 10px;
       }
     }
   }

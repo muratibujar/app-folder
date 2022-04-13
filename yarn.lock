@@ -1269,6 +1269,11 @@
     "source-map" "~0.6.1"
     "vue-template-es2015-compiler" "^1.9.0"
 
+"@vue/composition-api@^1.0.0-beta.1", "@vue/composition-api@^1.0.0-rc.1", "@vue/composition-api@^1.4.9":
+  "integrity" "sha512-l6YOeg5LEXmfPqyxAnBaCv1FMRw0OGKJ4m6nOWRm6ngt5TuHcj5ZoBRN+LXh3J0u6Ur3C4VA+RiKT+M0eItr/g=="
+  "resolved" "https://registry.npmjs.org/@vue/composition-api/-/composition-api-1.4.9.tgz"
+  "version" "1.4.9"
+
 "@vue/preload-webpack-plugin@^1.1.0":
   "integrity" "sha512-rcn2KhSHESBFMPj5vc5X2pI9bcBNQQixvJXhD5gZ4rN2iym/uH2qfDSQfUS5+qwiz0a85TCkeUs6w6jxFDudbw=="
   "resolved" "https://registry.npmjs.org/@vue/preload-webpack-plugin/-/preload-webpack-plugin-1.1.0.tgz"
@@ -9298,6 +9303,11 @@
   "resolved" "https://registry.npmjs.org/vue-apexcharts/-/vue-apexcharts-1.5.2.tgz"
   "version" "1.5.2"
 
+"vue-demi@^0.12.1":
+  "integrity" "sha512-BREuTgTYlUr0zw0EZn3hnhC3I6gPWv+Kwh4MCih6QcAeaTlaIX0DwOVN0wHej7hSvDPecz4jygy/idsgKfW58Q=="
+  "resolved" "https://registry.npmjs.org/vue-demi/-/vue-demi-0.12.5.tgz"
+  "version" "0.12.5"
+
 "vue-easy-lightbox@^0.16.2":
   "integrity" "sha512-pkfLBk9dZ9T+fk6bRgehDpIvaS81hOgDqsGpVEDgw8cGtO9FLfAT8hakaqNQOgMTCwrnkQcdfLTLqnad2rq46w=="
   "resolved" "https://registry.npmjs.org/vue-easy-lightbox/-/vue-easy-lightbox-0.16.2.tgz"
@@ -9355,6 +9365,13 @@
     "vue-hot-reload-api" "^2.3.0"
     "vue-style-loader" "^4.1.0"
 
+"vue-recaptcha@^2.0.1":
+  "integrity" "sha512-k7IHZUEqmMAwWQafkcQz6Y2PxBed7VUerM0ehCY8BlA0hXokTO1OVmj3xnr8m0J54XiNyoG2Jin270zQOvvsDA=="
+  "resolved" "https://registry.npmjs.org/vue-recaptcha/-/vue-recaptcha-2.0.1.tgz"
+  "version" "2.0.1"
+  dependencies:
+    "vue-demi" "^0.12.1"
+
 "vue-router@^3.0.3":
   "integrity" "sha512-utJ+QR3YlIC/6x6xq17UMXeAfxEvXA0VKD3PiSio7hBOZNusA1jXcbxZxVEfJunLp48oonjTepY8ORoIlRx/EQ=="
   "resolved" "https://registry.npmjs.org/vue-router/-/vue-router-3.0.7.tgz"
@@ -9381,7 +9398,7 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^2.5.17", "vue@^2.5.22", "vue@^2.6.10":
+"vue@^2.0.0 || ^3.0.0", "vue@^2.5.17", "vue@^2.5.22", "vue@^2.6.10", "vue@^3.0.0-0 || ^2.6.0", "vue@>= 2.5 < 3":
   "integrity" "sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.6.10.tgz"
   "version" "2.6.10"
