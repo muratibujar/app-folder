@@ -301,14 +301,14 @@ export default {
 
      save() {
 
-      this.loading = true;
-      console.log("loading",this.loading);
+
 
       this.$refs['documentForm'].validate(async (valid) => {
         if (this.show_file_error === null) {
           this.show_file_error = true
         }
         if (valid && this.show_file_error === false && this.recaptcha) {
+          this.loading = true;
           // this.uploadF();
           await this.guardarArchivo();
 
@@ -331,6 +331,11 @@ export default {
 
           // await  this.openNotif();
 
+          setTimeout(() => {
+            this.openNotif();
+            this.loading = false;
+          }, 3000);
+
         } else {
           return false;
         }
@@ -338,10 +343,7 @@ export default {
 
 
 
-       setTimeout(() => {
-         this.openNotif();
-         this.loading = false;
-       }, 3000);
+
 
 
     },
