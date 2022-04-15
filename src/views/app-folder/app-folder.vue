@@ -269,8 +269,7 @@ export default {
         }, {
           label: 'WITMAE (Women in Technology, Management and Applied Engineering\n' +
               '    Workshops)',
-          value: 'WITMAE (Women in Technology, Management and Applied Engineering\n' +
-              '    Workshops)'
+          value: 'WITMAE'
         }
       ]
 
@@ -499,14 +498,54 @@ export default {
     },
 
     guardarArchivo() {
+
+      var folder;
+
+      if(this.model.track === 'Administration'){
+        folder= '1O13BJEuR7VLGMNg9NYIOLE6OP5-ELcz1'
+      }
+      if(this.model.track === 'Construction'){
+        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      }
+      if(this.model.track === 'Distance Learning/Teaching Innovations'){
+        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      }
+      if(this.model.track === 'Electricity'){
+        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      }
+      if(this.model.track === 'Electronics'){
+        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      }
+      if(this.model.track === 'Construction'){
+        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      }
+      if(this.model.track === 'Computer Technology & Energy Issues'){
+        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      }
+      if(this.model.track === 'Graphics'){
+        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      }
+      if(this.model.track === 'Management'){
+        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      }
+      if(this.model.track === 'Micro/Nanotechnology'){
+        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      }
+      if(this.model.track === 'WITMAE'){
+        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      }
+
+      
+
          // const selectedFileS = document.getElementById('myFile').files[0];
         var file = document.getElementById('customFile').files[0]; //the file
+        var fileName = file.name + "/&/&"+folder
         var reader = new FileReader() //this for convert to Base64
         reader.readAsDataURL(file) //start conversion...
         reader.onload = function (e) { //.. once finished..
-          var rawLog = reader.result.split(',')[1]; //extract only thee file data part
-          var dataSend = { dataReq: { data: rawLog, name: file.name, type: file.type }, fname: "uploadFilesToGoogleDrive" }; //preapre info to send to API
-          fetch('https://script.google.com/macros/s/AKfycbxPzBsXq3H7lVe4bVIKp89YJwqc0XBMK4IWL_-Dpcsoz0MMX4rVvqwaQGrGqUHbx83CrA/exec', //your AppsScript URL
+          var rawLog = reader.result.split(',')[1] ; //extract only thee file data part
+          var dataSend = { dataReq: { data: rawLog, name: fileName, type: file.type }, fname: "uploadFilesToGoogleDrive" }; //preapre info to send to API
+          fetch('https://script.google.com/macros/s/AKfycbzWgkNMyquE2Lzh3L8Av5RyaaH56qeeV9ggdGvbVbhsOCTvGMk8pLECcXvVqJLwUb6agg/exec', //your AppsScript URL
               { method: "POST", body: JSON.stringify(dataSend) }) //send to Api
               .then(res => res.json()).then((a) => {
           }).catch(e => console.log(e))
