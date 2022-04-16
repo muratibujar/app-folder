@@ -216,9 +216,9 @@ export default {
         track: [
           {required: true, message: 'Field is required', trigger: 'change'},
         ],
-        message: [
-          {required: true, message: 'Field is required', trigger: 'change'},
-        ],
+        // message: [
+        //   {required: true, message: 'Field is required', trigger: 'change'},
+        // ],
       },
 
 
@@ -240,40 +240,34 @@ export default {
 
       options: [
         {
-          label: 'Administration',
-          value: 'Administration'
+          label: 'Program Administration and Accreditation',
+          value: 'Program Administration and Accreditation'
         }, {
-          label: 'Construction',
-          value: 'Construction'
+          label: 'Construction and Nanotechnology',
+          value: 'Construction and Nanotechnology'
         }, {
-          label: 'Distance Learning/Teaching Innovations',
-          value: 'Distance Learning/Teaching Innovations'
-        }, {
-          label: 'Electricity',
-          value: 'Electricity'
-        }, {
-          label: 'Electronics',
-          value: 'Electronics'
-        }, {
-          label: 'Computer Technology & Energy Issues',
-          value: 'Computer Technology & Energy Issues'
+          label: 'Teaching and Learning Innovations',
+          value: 'Teaching and Learning Innovations'
         }, {
           label: 'Graphics',
           value: 'Graphics'
         }, {
-          label: 'Management',
-          value: 'Management'
+          label: 'Automation, Electrical, and Computer Systems',
+          value: 'Automation, Electrical, and Computer Systems'
         }, {
-          label: 'Micro/Nanotechnology',
-          value: 'Micro/Nanotechnology'
+          label: 'Operational, Project, and Technology Management',
+          value: 'Operational, Project, and Technology Management'
         }, {
-          label: 'WITMAE (Women in Technology, Management and Applied Engineering\n' +
-              '    Workshops)',
-          value: 'WITMAE'
+          label: 'Manufacturing Systems',
+          value: 'Manufacturing Systems'
+        }, {
+          label: 'Safety',
+          value: 'Safety'
+        }, {
+          label: 'Other',
+          value: 'Other'
         }
       ]
-
-
     }
   },
 

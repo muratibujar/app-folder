@@ -4326,7 +4326,7 @@
     "universalify" "^0.1.0"
 
 "fs-minipass@^1.2.5":
-  "version" "1.2.5"
+  "version" "1.2.6"
   dependencies:
     "minipass" "^2.2.1"
 
@@ -4344,14 +4344,6 @@
   "integrity" "sha1-FQStJSMVjKpA20onh8sBQRmU6k8="
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
-
-"fsevents@^1.2.7":
-  "integrity" "sha512-oeyj2H3EjjonWcFjD5NvZNE9Rqe4UW+nQBU2HNeKw0koVLEFIhtyETyAakeAM3de7Z/SW5kcA+fZUait9EApnw=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-1.2.9.tgz"
-  "version" "1.2.9"
-  dependencies:
-    "nan" "^2.12.1"
-    "node-pre-gyp" "^0.12.0"
 
 "fstream@^1.0.0", "fstream@^1.0.12":
   "integrity" "sha512-WvJ193OHa0GHPEL+AycEJgxvBEwyfRkN1vhjca23OaPVMCaLCXTd5qAu82AjTcgP1UJmytkOKb63Ypde7raDIg=="
@@ -6029,16 +6021,11 @@
   "resolved" "https://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz"
   "version" "0.0.8"
 
-"minipass@^2.2.1", "minipass@^2.3.4", "minipass@^2.3.5":
+"minipass@^2.2.1", "minipass@^2.3.5":
   "version" "2.3.5"
   dependencies:
     "safe-buffer" "^5.1.2"
     "yallist" "^3.0.0"
-
-"minizlib@^1.1.1":
-  "version" "1.2.1"
-  dependencies:
-    "minipass" "^2.2.1"
 
 "minizlib@^1.2.1":
   "version" "1.2.1"
@@ -6159,7 +6146,7 @@
     "object-assign" "^4.0.1"
     "thenify-all" "^1.0.0"
 
-"nan@^2.12.1", "nan@^2.13.2":
+"nan@^2.13.2":
   "integrity" "sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg=="
   "resolved" "https://registry.npmjs.org/nan/-/nan-2.14.0.tgz"
   "version" "2.14.0"
@@ -6187,9 +6174,9 @@
   "version" "1.4.0"
 
 "needle@^2.2.1":
-  "version" "2.3.0"
+  "version" "2.4.0"
   dependencies:
-    "debug" "^4.1.0"
+    "debug" "^3.2.6"
     "iconv-lite" "^0.4.4"
     "sax" "^1.2.4"
 
@@ -6283,20 +6270,6 @@
     "url" "^0.11.0"
     "util" "^0.11.0"
     "vm-browserify" "^1.0.1"
-
-"node-pre-gyp@^0.12.0":
-  "version" "0.12.0"
-  dependencies:
-    "detect-libc" "^1.0.2"
-    "mkdirp" "^0.5.1"
-    "needle" "^2.2.1"
-    "nopt" "^4.0.1"
-    "npm-packlist" "^1.1.6"
-    "npmlog" "^4.0.2"
-    "rc" "^1.2.7"
-    "rimraf" "^2.6.1"
-    "semver" "^5.3.0"
-    "tar" "^4"
 
 "node-pre-gyp@^0.13.0":
   "version" "0.13.0"
@@ -6410,7 +6383,7 @@
   "version" "1.0.6"
 
 "npm-packlist@^1.1.6":
-  "version" "1.4.1"
+  "version" "1.4.4"
   dependencies:
     "ignore-walk" "^3.0.1"
     "npm-bundled" "^1.0.1"
@@ -8844,15 +8817,15 @@
     "inherits" "2"
 
 "tar@^4":
-  "version" "4.4.8"
+  "version" "4.4.10"
   dependencies:
     "chownr" "^1.1.1"
     "fs-minipass" "^1.2.5"
-    "minipass" "^2.3.4"
-    "minizlib" "^1.1.1"
+    "minipass" "^2.3.5"
+    "minizlib" "^1.2.1"
     "mkdirp" "^0.5.0"
     "safe-buffer" "^5.1.2"
-    "yallist" "^3.0.2"
+    "yallist" "^3.0.3"
 
 "terser-webpack-plugin@^1.1.0", "terser-webpack-plugin@^1.2.3":
   "integrity" "sha512-W2YWmxPjjkUcOWa4pBEv4OP4er1aeQJlSo2UhtCFQCuRXEHjOFscO8VyWHj9JLlA0RzQb8Y2/Ta78XZvT54uGg=="
@@ -9861,7 +9834,12 @@
   "resolved" "https://registry.npmjs.org/yallist/-/yallist-2.1.2.tgz"
   "version" "2.1.2"
 
-"yallist@^3.0.0", "yallist@^3.0.2", "yallist@^3.0.3":
+"yallist@^3.0.0", "yallist@^3.0.3":
+  "integrity" "sha512-S+Zk8DEWE6oKpV+vI3qWkaK+jSbIK86pCwe2IF/xwIpQ8jEuxpw9NyaGjmp9+BoJv5FV2piqCDcoCtStppiq2A=="
+  "resolved" "https://registry.npmjs.org/yallist/-/yallist-3.0.3.tgz"
+  "version" "3.0.3"
+
+"yallist@^3.0.2":
   "integrity" "sha512-S+Zk8DEWE6oKpV+vI3qWkaK+jSbIK86pCwe2IF/xwIpQ8jEuxpw9NyaGjmp9+BoJv5FV2piqCDcoCtStppiq2A=="
   "resolved" "https://registry.npmjs.org/yallist/-/yallist-3.0.3.tgz"
   "version" "3.0.3"
