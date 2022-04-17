@@ -116,7 +116,7 @@
           <div class="field-btn">
             <div :class="{mx_recaptcha_failed: !recaptcha}">
               <vue-recaptcha
-                  sitekey="6LeX_GwfAAAAANhIQaqntKl5ItP1s9kwbxtaT7aO"
+                  sitekey="6Lff-30fAAAAAD6G_u4Y7NepNYLJXqyStMEYuiKw"
                   @verify="mxVerify"
 
               ></vue-recaptcha>
