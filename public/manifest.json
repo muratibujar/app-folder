@@ -1,6 +1,6 @@
 {
-  "name": "app-folder",
-  "short_name": "app-folder",
+  "name": "Atmae-Conference-2022",
+  "short_name": "Atmae-Conference",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "white",

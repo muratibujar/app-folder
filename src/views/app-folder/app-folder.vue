@@ -310,7 +310,7 @@ export default {
           // this.uploadF();
           await this.guardarArchivo();
 
-          await db.collection('/folder-app-1/data/data').add(this.model).then(docRef => {
+          await db.collection('/atmae-conference-2022/data/data').add(this.model).then(docRef => {
 
 
             this.model = {
