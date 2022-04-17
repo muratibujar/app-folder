@@ -10,13 +10,13 @@ export default {
   // appId: "1:172590875378:web:97efe6d6c99ecbc5a8c66b",
   // measurementId: "G-Y8S4NY4K5L"
 
-  apiKey: "AIzaSyAIs6CC_GvxdYqdqIyJdkBMJrRvWOZDQGI",
-  authDomain: "bujar-web-app.firebaseapp.com",
-  databaseURL: "https://bujar-web-app-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "bujar-web-app",
-  storageBucket: "bujar-web-app.appspot.com",
-  messagingSenderId: "637491030589",
-  appId: "1:637491030589:web:ab9ef2769053360fa09854"
+  apiKey: "AIzaSyCQLQYibrPiAvrCH8CjISJv81ozifiu6Ys",
+  authDomain: "atmae-conference-2022.firebaseapp.com",
+  databaseURL: "https://atmae-conference-2022-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "atmae-conference-2022",
+  storageBucket: "atmae-conference-2022.appspot.com",
+  messagingSenderId: "368533827829",
+  appId: "1:368533827829:web:0e32ac06b7da27ceb995bc"
 
 }
 

@@ -7,7 +7,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "site": "folder-app-1",
+    "site": "atmae-conference-2022",
     "public": "dist",
     "ignore": [
       "firebase.json",
