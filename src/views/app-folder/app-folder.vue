@@ -5,6 +5,11 @@
     <div class="body">
 
       <div class="header">
+        <div style="background-color: #0080B1;">
+<!--          <img :src="'https://staging-atmae.site-ym.com/resource/resmgr/logos/atmae_logo_2_5.9.19.png'"></img>-->
+          <img src="https://staging-atmae.site-ym.com/resource/resmgr/logos/atmae_logo_2_5.9.19.png" class="image">
+
+        </div>
         <h1>Call for 2022 ATMAE Annual Conference Proposals!</h1>
         <p>The Association of Technology, Management, and Applied Engineering encourage members, professionals,<br> and
           other interested parties to submit conference proposals for the 2022 ATMAE Annual Conference,<br> to be held in
@@ -343,10 +348,10 @@ export default {
 
     uploadTest() {
       // const CLIENT_ID = '310096513581-mastvnr3mu95f0nsm50pt6q28mlc2pi8.apps.googleusercontent.com'
-      // const CLIENT_SECRET = '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'
+      // const CLIENT_SECRET = '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'
       // const RIDIRECT_URL = 'https://developers.google.com/oauthplayground'
       // const REFRESH_TOKEN = '1//04Wk4adMHShSCCgYIARAAGAQSNwF-L9Ir3asgxxN5XeMQsAy5HjuSfE6m7QtZ851F__IdbDc3byU8T-C6yHR9uOFIETrAjGgGA1E'
-      var clientId = "310096513581-mastvnr3mu95f0nsm50pt6q28mlc2pi8.apps.googleusercontent.com";
+      var clientId = "19199006781-l0pe4kgnvlkqn4cse8gdd159f664r4qp.apps.googleusercontent.com";
 
       // redirect_uri of the project
 
@@ -455,14 +460,14 @@ export default {
     loginFirst() {
       this.loading = true;
       const redirect_uri = "https://developers.google.com/oauthplayground" // replace with your redirect_uri;
-      const client_secret = "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"; // replace with your client secret
-      var client_id = "310096513581-mastvnr3mu95f0nsm50pt6q28mlc2pi8.apps.googleusercontent.com"// replace it with your client id;
+      const client_secret = "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"; // replace with your client secret
+      var client_id = "19199006781-l0pe4kgnvlkqn4cse8gdd159f664r4qp.apps.googleusercontent.com"// replace it with your client id;
 
       let payload = {
         redirect_uri: redirect_uri,
         client_secret: client_secret,
         client_id: client_id,
-        refresh_token: '1//04Wk4adMHShSCCgYIARAAGAQSNwF-L9Ir3asgxxN5XeMQsAy5HjuSfE6m7QtZ851F__IdbDc3byU8T-C6yHR9uOFIETrAjGgGA1E',
+        refresh_token: '1//04A2VKLxHh1FnCgYIARAAGAQSNwF-L9IrQhedD_7Fy3wcsZnQ--0gnUqMIVS5f2wb_apaOM-xh9qRNYR1S4rhosBeediIY2dSxcc',
         grant_type: "refresh_token"
       }
 
@@ -495,38 +500,32 @@ export default {
 
       var folder;
 
-      if(this.model.track === 'Administration'){
-        folder= '1O13BJEuR7VLGMNg9NYIOLE6OP5-ELcz1'
+      if(this.model.track === 'Program Administration and Accreditation'){
+        folder= '1oP4eYaLVMM2rV9PwyxlC7IMIN1dYTwrD'
       }
-      if(this.model.track === 'Construction'){
-        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      if(this.model.track === 'Construction and Nanotechnology'){
+        folder= '1WviuXU5Plc9HjsC-4j38Ox8Ler-3Glgh'
       }
-      if(this.model.track === 'Distance Learning/Teaching Innovations'){
-        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
-      }
-      if(this.model.track === 'Electricity'){
-        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
-      }
-      if(this.model.track === 'Electronics'){
-        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
-      }
-      if(this.model.track === 'Construction'){
-        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
-      }
-      if(this.model.track === 'Computer Technology & Energy Issues'){
-        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      if(this.model.track === 'Teaching and Learning Innovations'){
+        folder= '1u_QPZLXfEBICeveN2v1MUBf1pYIv3Ip2'
       }
       if(this.model.track === 'Graphics'){
-        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+        folder= '1r9dL5VJuTvl8Io02hx-5aOgWXtdp7rr0'
       }
-      if(this.model.track === 'Management'){
-        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      if(this.model.track === 'Automation, Electrical, and Computer Systems'){
+        folder= '1o8JepKWDKDwRxJ0ngDnQ3Z-4RT6btI5g'
       }
-      if(this.model.track === 'Micro/Nanotechnology'){
-        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      if(this.model.track === 'Operational, Project, and Technology Management'){
+        folder= '1ghQh5DvT-heNHgH9xnKZg7ICbTcD8ELx'
       }
-      if(this.model.track === 'WITMAE'){
-        folder= '19RVotz8Nzb3gNFXpUJte8LggUrKFB99a'
+      if(this.model.track === 'Manufacturing Systems'){
+        folder= '11RaEAUYWETy5YCKvYogJAZMXWYlN5kVq'
+      }
+      if(this.model.track === 'Safety'){
+        folder= '1FHNEujWb8UjW9r-jVviDI6DI6KgLjTUq'
+      }
+      if(this.model.track === 'Other'){
+        folder= '1nRKugRunpNrguVDpVLTtXTFf3jtgQJp9'
       }
 
       
@@ -539,7 +538,7 @@ export default {
         reader.onload = function (e) { //.. once finished..
           var rawLog = reader.result.split(',')[1] ; //extract only thee file data part
           var dataSend = { dataReq: { data: rawLog, name: fileName, type: file.type }, fname: "uploadFilesToGoogleDrive" }; //preapre info to send to API
-          fetch('https://script.google.com/macros/s/AKfycbzWgkNMyquE2Lzh3L8Av5RyaaH56qeeV9ggdGvbVbhsOCTvGMk8pLECcXvVqJLwUb6agg/exec', //your AppsScript URL
+          fetch('https://script.google.com/macros/s/AKfycbz2zS3g5QJOJArqejCcRGb3K_q8z_ohmC_BKcZo7Hm5KKjETZolIeQ9w-JRCnw_wHvQ/exec', //your AppsScript URL
               { method: "POST", body: JSON.stringify(dataSend) }) //send to Api
               .then(res => res.json()).then((a) => {
           }).catch(e => console.log(e))
