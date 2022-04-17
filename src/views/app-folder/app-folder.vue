@@ -64,8 +64,10 @@
             <span>Select one:</span>
             <el-form-item label="" prop="authors_phone">
               <el-radio v-model="model.select_one" label="Paper Presentation">Paper Presentation</el-radio>
+              <el-radio v-model="model.select_one" label="Presentation">Presentation</el-radio>
               <el-radio v-model="model.select_one" label="Poster Presentation">Poster Presentation</el-radio>
               <el-radio v-model="model.select_one" label="Workshop">Workshop</el-radio>
+
 
             </el-form-item>
           </div>
