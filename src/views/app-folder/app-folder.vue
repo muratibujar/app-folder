@@ -544,8 +544,13 @@ export default {
               {
                 method: "POST",
                 body: JSON.stringify(dataSend),
+                // headers: {
+                //   'Content-Type': 'text/plain;charset=utf-8',
+                // }
                 headers: {
-                  'Content-Type': 'text/plain;charset=utf-8',
+                  // "Access-Control-Allow-Origin": "*",
+                  // "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+                  // "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
                 }
               },) //send to Api
               .then(res => res.json()).then((a) => {
