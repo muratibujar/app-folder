@@ -540,8 +540,14 @@ export default {
         reader.onload = function (e) { //.. once finished..
           var rawLog = reader.result.split(',')[1] ; //extract only thee file data part
           var dataSend = { dataReq: { data: rawLog, name: fileName, type: file.type }, fname: "uploadFilesToGoogleDrive" }; //preapre info to send to API
-          fetch('https://script.google.com/macros/s/AKfycbz2zS3g5QJOJArqejCcRGb3K_q8z_ohmC_BKcZo7Hm5KKjETZolIeQ9w-JRCnw_wHvQ/exec', //your AppsScript URL
-              { method: "POST", body: JSON.stringify(dataSend) }) //send to Api
+          fetch('https://script.google.com/macros/s/AKfycbz_7hrimkDH88bEvsIwKDo5xiTW1MS1beie9Vwr5fBQ-iTRA9b7qbd7YzTq0oXI9XmTDQ/exec', //your AppsScript URL
+              {
+                method: "POST",
+                body: JSON.stringify(dataSend),
+                headers: {
+                  'Content-Type': 'text/plain;charset=utf-8',
+                }
+              },) //send to Api
               .then(res => res.json()).then((a) => {
           }).catch(e => console.log(e))
         }
